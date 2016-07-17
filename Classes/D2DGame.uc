@@ -9,7 +9,7 @@ class D2DGame extends CRZBloodLust;
 
 
 // Remove momentum along X axis
-//TODO: see about removing the "random momentum" when pawns touch each other
+//NOTE: kind of useless now we stuck everything between two blocking volumes ^^
 function ReduceDamage(out int Damage, Pawn injured, Controller InstigatedBy, Vector HitLocation, out Vector Momentum, class<DamageType> DamageType, Actor DamageCauser)
 {
 	Momentum.X = 0;
@@ -38,8 +38,8 @@ function bool CheckRelevance(Actor Other)
 
 defaultproperties
 {
-	Acronym="TT"
-	MapPrefixes(0)="TT"
+	Acronym="2D"
+	MapPrefixes(0)="2D"
 	PlayerControllerClass=class'D2DPlayerController'
 	DefaultPawnClass=class'D2DPawn'
 	HUDType=class'D2DHud'

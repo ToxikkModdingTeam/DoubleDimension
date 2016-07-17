@@ -33,7 +33,7 @@ function UpdateRotation(float dt)
 	//???
 	//ProcessViewRotation(dt, ViewRot, DeltaRot);
 
-	// In standalone, weapon use GetAdjustedAimFor (which returns Rotation) for firing
+	// Will orient Pawn's pitch in standalone/client
 	SetRotation(TargetRot);
 
 	if ( Pawn != None )
@@ -44,7 +44,9 @@ function UpdateRotation(float dt)
 		// Orients the pawn left or right
 		Pawn.FaceRotation(Rotation, dt);
 
+		// Will orient Pawn's pitch and weaponfire in multiplayer
 		Pawn.SetRemoteViewPitch(Rotation.Pitch);
+
 
 		// We want to aim at crosshair, but this is complex
 		// because the first start location is the tip of the gun
@@ -111,6 +113,7 @@ function Rotator Rot2DToRotation(Vector Rot2D)
 
 
 // Trace direction for weapons
+//NOTE: This is only for standalone. In multiplayer, Pawn rotation and RemoteViewPitch are used instead (see Pawn.GetAdjustedAimFor)
 function Rotator GetAdjustedAimFor(Weapon W, Vector StartFireLoc)
 {
 	return Rotation;

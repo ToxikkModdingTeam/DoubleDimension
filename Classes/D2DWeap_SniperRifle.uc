@@ -27,7 +27,7 @@ simulated state WeaponFiring
 	}
 }
 
-// Sound is called right before firing - the bZoomed var has not changed yet
+// Sound is called right before firing - the bZooming var has not changed yet
 simulated function PlayFiringSound()
 {
 	if ( CurrentFireMode == 1 && WorldInfo.NetMode != NM_DedicatedServer )

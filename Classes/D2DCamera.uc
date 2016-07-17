@@ -60,5 +60,7 @@ defaultproperties
 	CameraOffset=(X=-1024,Y=0,Z=0)
 	CurrentZoom=1.0
 	TargetZoom=1.0
+
+	// setting FreeCam style will prevent weaponfire from using camera for tracing (see Pawn.GetBaseAimRotation)
 	CameraStyle=FreeCam
 }
