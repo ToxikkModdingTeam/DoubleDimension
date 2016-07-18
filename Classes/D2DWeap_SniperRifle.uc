@@ -19,8 +19,6 @@ simulated function GFxMoviePlayer CreateScope()
 
 simulated state WeaponFiring
 {
-	local D2DPlayerController PC;
-
 	simulated event Tick(float dt)
 	{
 		Super(CRZWeapon).Tick(dt);

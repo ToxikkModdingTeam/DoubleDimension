@@ -39,8 +39,9 @@ function bool CheckRelevance(Actor Other)
 defaultproperties
 {
 	Acronym="2D"
-	MapPrefixes(0)="2D"
+	MapPrefixes(0)="D2D"
 	PlayerControllerClass=class'D2DPlayerController'
 	DefaultPawnClass=class'D2DPawn'
 	HUDType=class'D2DHud'
+	BotClass=class'D2DBot'
 }

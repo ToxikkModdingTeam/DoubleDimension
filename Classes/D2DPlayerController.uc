@@ -22,10 +22,21 @@ function UpdateRotation(float dt)
 	CrosshairPos.Z = 0;
 
 	// Get Pawn-To-Crosshair vector
-	WeapCenterOffset = CenterOffsetForWeapon((Pawn != None && Pawn.Weapon != None) ? Pawn.Weapon.Class : None);
-	if ( CrosshairPos.X < 0 )
-		WeapCenterOffset.X *= -1;
-	Rot2D = Normal(CrosshairPos + WeapCenterOffset);
+	if ( Pawn != None )
+	{
+		WeapCenterOffset = CenterOffsetForWeapon((Pawn != None && Pawn.Weapon != None) ? Pawn.Weapon.Class : None);
+		WeapCenterOffset.Y = -WeapCenterOffset.Y;   //invert because screen Y-axis is downwards
+
+		if ( CrosshairPos.X < 0 )
+			WeapCenterOffset.X *= -1;
+
+		if ( Pawn.bIsCrouched ) //TODO: better handling for crouching, hardcode values in CenterOffsetForWeapon
+			WeapCenterOffset.Y *= 0.5;
+
+		Rot2D = Normal(CrosshairPos - WeapCenterOffset);    // this gives us approximate Weapon-To-Crosshair 2D vector
+	}
+	else
+		Rot2D = Normal(CrosshairPos);
 
 	// Convert to 3D Rotation
 	TargetRot = Rot2DToRotation(Rot2D);

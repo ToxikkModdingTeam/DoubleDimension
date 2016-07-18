@@ -32,6 +32,9 @@ function UpdateViewTarget(out TViewTarget OutVT, float dt)
 	// Make the camera point towards the target's location
 	OutVT.POV.Rotation = Rotator(OutVT.Target.Location - OutVT.POV.Location);
 
+	bConstrainAspectRatio = true;
+	ConstrainedAspectRatio = AspectRatio16x9;
+	OutVT.AspectRatio = ConstrainedAspectRatio;
 }
 
 function AnimateZoom(float dt)
@@ -57,7 +60,7 @@ function AnimateZoom(float dt)
 
 defaultproperties
 {
-	CameraOffset=(X=-1024,Y=0,Z=0)
+	CameraOffset=(X=-1000,Y=0,Z=0)
 	CurrentZoom=1.0
 	TargetZoom=1.0
 

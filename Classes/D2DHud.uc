@@ -15,13 +15,18 @@ event PostRender()
 	local D2DPlayerController PC;
 	local float CrosshairClamp;
 
-	if ( HudMovie != None && HudMovie.Crosshair_MC != None )
-		HudMovie.Crosshair_MC.SetVisible(false);
+	if ( HudMovie != None )
+	{
+		if ( HudMovie.Crosshair_MC != None )
+			HudMovie.Crosshair_MC.SetVisible(false);
+
+		//HudMovie.ShowCinebars(true, false);
+	}
 
 	Super.PostRender();
 
 	PC = D2DPlayerController(PlayerOwner);
-	if ( PC != None )
+	if ( PC != None && PC.Pawn != None && PC.Pawn.Health > 0 && !PC.Pawn.IsInState('Dead') )
 	{
 		// clamp crosshair around center, allowed area depends on screen size
 		CrosshairClamp = 0.20*Min(Canvas.ClipX, Canvas.ClipY);

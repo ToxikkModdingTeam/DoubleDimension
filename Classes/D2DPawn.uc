@@ -7,6 +7,7 @@
 //================================================================
 class D2DPawn extends CRZPawn;
 
+
 function bool Dodge(EDoubleClickDir DoubleClickMove)
 {
 	// PLAYER: dodge left/right becomes forward/backwards
@@ -32,7 +33,14 @@ function bool Dodge(EDoubleClickDir DoubleClickMove)
 	return Super.Dodge(DoubleClickMove);
 }
 
+
 defaultproperties
 {
+	// AI
 	bCanStrafe=false
+	//HearingThreshold=2800
+	//Alertness=0
+	SightRadius=950
+	PeripheralVision=-1
+	ControllerClass=class'D2DBot'
 }
