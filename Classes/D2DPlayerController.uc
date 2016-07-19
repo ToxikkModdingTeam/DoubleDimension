@@ -257,6 +257,24 @@ simulated function SetCameraZoom(float TargetZoom)
 	}
 }
 
+exec function ConstrainAspectRatio()
+{
+	local D2DCamera Cam;
+
+	if ( WorldInfo.NetMode != NM_Standalone )
+	{
+		ClientMessage("Only allowed in offline games!");
+		return;
+	}
+
+	Cam = D2DCamera(PlayerCamera);
+	if ( Cam != None )
+	{
+		Cam.bConstrainStandaloneAR = !Cam.bConstrainStandaloneAR;
+		Cam.SaveConfig();
+	}
+}
+
 
 defaultproperties
 {

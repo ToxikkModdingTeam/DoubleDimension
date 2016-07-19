@@ -5,7 +5,8 @@
 // ----------------
 // by Chatouille
 //================================================================
-class D2DCamera extends Camera;
+class D2DCamera extends Camera
+	Config(DoubleDimension);
 
 var Vector CameraOffset;
 
@@ -16,6 +17,9 @@ var float PreviousZoom;
 var float TargetZoom;
 var float TargetZoomRemDur;
 var float TargetZoomTotalDur;
+
+// whether to constrain aspect ratio in offline games (always do in netplay)
+var config bool bConstrainStandaloneAR;
 
 
 // Updates the camera's view target. Called once per tick
@@ -32,9 +36,13 @@ function UpdateViewTarget(out TViewTarget OutVT, float dt)
 	// Make the camera point towards the target's location
 	OutVT.POV.Rotation = Rotator(OutVT.Target.Location - OutVT.POV.Location);
 
-	bConstrainAspectRatio = true;
-	ConstrainedAspectRatio = AspectRatio16x9;
-	OutVT.AspectRatio = ConstrainedAspectRatio;
+	// Constrain ratio in netplay for fairness (adds black bars to force 16:9)
+	bConstrainAspectRatio = (WorldInfo.NetMode != NM_Standalone || bConstrainStandaloneAR);
+	if ( bConstrainAspectRatio )
+	{
+		ConstrainedAspectRatio = AspectRatio16x9;
+		OutVT.AspectRatio = ConstrainedAspectRatio;
+	}
 }
 
 function AnimateZoom(float dt)
